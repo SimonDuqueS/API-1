@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 25-10-2023 a las 00:15:40
+-- Tiempo de generación: 26-10-2023 a las 20:13:17
 -- Versión del servidor: 8.0.31
--- Versión de PHP: 8.0.26
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `articulosdb`
+-- Base de datos: `articulosbd`
 --
 
 -- --------------------------------------------------------
@@ -30,17 +30,19 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `articulos`;
 CREATE TABLE IF NOT EXISTS `articulos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(255) DEFAULT NULL,
-  `contenido` text,
+  `Descripcion` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Precio` int NOT NULL,
+  `stock` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Volcado de datos para la tabla `articulos`
 --
 
-INSERT INTO `articulos` (`id`, `titulo`, `contenido`) VALUES
-(0, '', '');
+INSERT INTO `articulos` (`id`, `Descripcion`, `Precio`, `stock`) VALUES
+(1, 'Camisetas', 10000, 40),
+(2, 'Camisetas', 10000, 40);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
