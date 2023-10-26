@@ -72,3 +72,32 @@ const puerto = process.env.PUERTO || 3000;
 app.listen(puerto, function () {
     console.log('Servidor OK en puerto ' + puerto);
 });
+
+app.put('/Api/articulos/:Id',(req,res)=>{
+    let Id = req.params.Id;
+    let data = {
+    Descripcion: req.body.Descripcion,
+    Precio: req.body.Precio,
+    Stock: req.body.Stock
+};
+let sql = "UPDATE articulos SET ? WHERE Id = ?";
+conexion.query(sql, [data, Id], (error, results)=>{
+    if (error) {
+        throw error;
+    } else {
+        res.send("Registro actualizado con exito");
+    }
+});
+});
+
+app.delete('/Api/articulos/:Id', (req, res) =>{
+    let Id = req.params.Id;
+    let sql = "DELETE FROM articulos WHERE Id = ?";
+    conexion.query(sql, [Id], (error, result) =>{
+        if (error){
+            throw error;
+        } else {
+            res.send ("Registro eliminado con exito");
+        }
+    });
+});
