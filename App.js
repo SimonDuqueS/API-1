@@ -1,8 +1,10 @@
 const express = require('express');
 const mysql = require('mysql');
-const bodyParser = require('body-parser');
+
 const app = express();
-app.use(bodyParser.json());
+
+app.use(express.json());
+
 
 const conexion = mysql.createConnection({
     host: 'localhost',
@@ -44,22 +46,17 @@ app.get('/api/articulos/:id', (req, res) => {
     });
 });
 
-app.post('/api/articulos', (req, res) => {
-    const data = {
-        id: req.body.id,
-        descripcion: req.body.descripcion,
-        precio: req.body.precio,
-        stock: req.body.stock
-    };
-    const sql = "INSERT INTO articulos SET ?";
-    conexion.query(sql, data, function (error, resultados) {
-        if (error) {
+app.post('/api/articulos',(req,res)=>{
+    let data = {Descripcion:req.body.Descripcion, Precio:req.body.Precio, Stock:req.body.Stock};
+    let sql = "INSERT INTO articulos SET ?";
+    conexion.query(sql,data,function(error,results){
+        if(error){
             throw error;
-        } else {
-            res.json({ mensaje: 'Artículo creado', id: resultados.insertId });
+        } else{
+            res.send(results);
         }
-    });
-});
+    })
+})
 
 app.on('exit', function () {
     conexion.end(function (error) {
